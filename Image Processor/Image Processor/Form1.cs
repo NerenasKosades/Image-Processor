@@ -13,7 +13,11 @@ namespace Image_Processor
     public partial class Form1 : Form
     {
         static Bitmap image; //Рабочее изображение
+        //Bitmap im = new Bitmap(pictureBox1.image);
+        
         Bitmap startImage; // Хранение стартового изображения        
+        //int imW = image.Width;
+        //int imH = image.Height;
         public Form1()
         {
             InitializeComponent();
@@ -35,7 +39,7 @@ namespace Image_Processor
                     }
                     catch
                     {
-                        MessageBox.Show("Невозможно сохранить изображение", "Ошибка",
+                        MessageBox.Show("Сначала загрузите изображение", "Ошибка",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -60,6 +64,24 @@ namespace Image_Processor
                     DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Bitmap bmp = new Bitmap(pictureBox1.Image);
+            }
+            catch
+            {
+                MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
