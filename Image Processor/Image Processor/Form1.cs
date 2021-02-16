@@ -71,6 +71,34 @@ namespace Image_Processor
             try
             {
                 Bitmap bmp = new Bitmap(pictureBox1.Image);
+                int[,] arrayBmp = new int[bmp.Width, bmp.Height];
+                int[] masX = new int[bmp.Width * bmp.Height];
+                int[] masY = new int[256];
+
+                for (int i = 0; i < image.Height; i++)           // Получаем значения яркости и записываем в массив
+                {
+                    for (int j = 0; j < image.Width; j++)
+                    {
+                        arrayBmp[i, j] = ((image.GetPixel(i, j) == Color.Red ? 0 : 1) + (image.GetPixel(i, j) == Color.Green ? 0 : 1) + (image.GetPixel(i, j) == Color.Blue ? 0 : 1)) / 3;                        
+                    }
+                }
+               
+                for (int i = 0; i < 256; i++)           // Заполняем ось X
+                {
+                    masX[i] = i;
+                }
+                
+                int count = 0;                          //Заполняем ось Y
+                for (int i = 0; i < image.Height; i++)         
+                {
+                    for (int j = 0; j < image.Width; j++)
+                    {
+                        masY[count] = arrayBmp[i, j];
+                        count++;
+                    }
+                }
+
+                  this.chart1.Series["Series1"].Points.DataBindXY(masX, masY);    // Построение гистограммы
             }
             catch
             {
