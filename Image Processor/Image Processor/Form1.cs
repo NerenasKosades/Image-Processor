@@ -68,9 +68,9 @@ namespace Image_Processor
 
         private void button3_Click(object sender, EventArgs e)
         {
-//            try
-//            {
-                Bitmap bmp = new Bitmap(pictureBox1.Image);
+            try
+            {
+                Bitmap bmp = new Bitmap(pictureBox1.Image);         
                 int[,] arrayBmp = new int[bmp.Width, bmp.Height];
                 int[] masY = new int[bmp.Width * bmp.Height];
                 int[] masX = new int[bmp.Width * bmp.Height];
@@ -81,8 +81,8 @@ namespace Image_Processor
                 {                    
                     for (int j = 0; j < image.Width; j++)
                     {
-                    pixelColor = image.GetPixel(i, j);
-                    arrayBmp[i, j] = Convert.ToInt32(pixelColor.GetBrightness() * 256);
+                    pixelColor = bmp.GetPixel(i, j);          // Получаем цвет пикселя
+                    arrayBmp[i, j] = Convert.ToInt32(pixelColor.GetBrightness() * 256);         //Получаем яркость пикселя
                     //arrayBmp[i, j] = ((image.GetPixel(i, j) == Color.Red ? 0 : 256) + (image.GetPixel(i, j) == Color.Green ? 0 : 256) + (image.GetPixel(i, j) == Color.Blue ? 0 : 256)) / 3;                        
                     }
                 }
@@ -103,11 +103,11 @@ namespace Image_Processor
                 }
 
                   this.chart1.Series["Series1"].Points.DataBindXY(masX, masY);    // Построение гистограммы
-//            }
-//            catch
-//            {
-//                MessageBox.Show("Что-то пошло не так", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-//            }
+            }
+            catch
+            {
+                MessageBox.Show("Загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             
         }
 
