@@ -115,5 +115,19 @@ namespace Image_Processor
         {
             
         }
+
+        private void button4_Click(object sender, EventArgs e)          //Реализация кнопки сброса изображения к начальному
+        {
+            try
+            {
+                pictureBox1.Image = startImage;
+            }
+            catch
+            {
+                MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
     }
 }
