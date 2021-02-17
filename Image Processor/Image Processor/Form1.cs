@@ -11,19 +11,17 @@ using System.Windows.Forms;
 namespace Image_Processor
 {
     public partial class Form1 : Form
-    {
-        static Bitmap image; //Рабочее изображение
-        //Bitmap im = new Bitmap(pictureBox1.image);
+    {      
+        static Bitmap image;            //Рабочее изображение
+        Bitmap startImage;          // Хранение стартового изображения   
         
-        Bitmap startImage; // Хранение стартового изображения        
-        //int imW = image.Width;
-        //int imH = image.Height;
+       
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)          //Реализация кнопки сохранения изображения
         {
             {
                 SaveFileDialog savedialog = new SaveFileDialog();
@@ -46,7 +44,7 @@ namespace Image_Processor
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)          //Реализация кнопки загрузки изображения
         {
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.Filter = "BitMap Files()*.bmp|*.bmp";
@@ -66,11 +64,11 @@ namespace Image_Processor
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)          //Реализация кнопки построения гистограммы
         {
             try
             {
-                Bitmap bmp = new Bitmap(pictureBox1.Image);         
+                Bitmap bmp = new Bitmap(pictureBox1.Image);
                 int[,] arrayBmp = new int[bmp.Width, bmp.Height];
                 int[] masY = new int[bmp.Width * bmp.Height];
                 int[] masX = new int[bmp.Width * bmp.Height];
@@ -78,22 +76,22 @@ namespace Image_Processor
                 Color pixelColor;
 
                 for (int i = 0; i < image.Height; i++)           // Получаем значения яркости и записываем в массив                
-                {                    
+                {
                     for (int j = 0; j < image.Width; j++)
                     {
-                    pixelColor = bmp.GetPixel(i, j);          // Получаем цвет пикселя
-                    arrayBmp[i, j] = Convert.ToInt32(pixelColor.GetBrightness() * 256);         //Получаем яркость пикселя
-                    //arrayBmp[i, j] = ((image.GetPixel(i, j) == Color.Red ? 0 : 256) + (image.GetPixel(i, j) == Color.Green ? 0 : 256) + (image.GetPixel(i, j) == Color.Blue ? 0 : 256)) / 3;                        
+                        pixelColor = bmp.GetPixel(i, j);          // Получаем цвет пикселя
+                        arrayBmp[i, j] = Convert.ToInt32(pixelColor.GetBrightness() * 255);         //Получаем яркость пикселя
+                                                                                                    //arrayBmp[i, j] = ((image.GetPixel(i, j) == Color.Red ? 0 : 256) + (image.GetPixel(i, j) == Color.Green ? 0 : 256) + (image.GetPixel(i, j) == Color.Blue ? 0 : 256)) / 3;                        
                     }
                 }
-               
+
                 for (int i = 0; i < bmp.Width * bmp.Height; i++)           // Заполняем ось X
                 {
                     masX[i] = i;
                 }
-                
+
                 int count = 0;                          //Заполняем ось Y
-                for (int i = 0; i < image.Height; i++)         
+                for (int i = 0; i < image.Height; i++)
                 {
                     for (int j = 0; j < image.Width; j++)
                     {
@@ -102,32 +100,89 @@ namespace Image_Processor
                     }
                 }
 
-                  this.chart1.Series["Series1"].Points.DataBindXY(masX, masY);    // Построение гистограммы
+                this.chart1.Series["Series1"].Points.DataBindXY(masX, masY);    // Построение гистограммы
             }
             catch
             {
                 MessageBox.Show("Загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button4_Click(object sender, EventArgs e)          //Реализация кнопки сброса изображения к начальному
         {
-            try
-            {
+           if(pictureBox1.Image != null)             
+           { 
                 pictureBox1.Image = startImage;
-            }
-            catch
-            {
+           }
+           else
+           {
                 MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+           }
         }
 
+        private void button5_Click(object sender, EventArgs e)          //Реализация кнопки коррекции диапазона яркости
+        {
+            Bitmap bmpCheck = new Bitmap(pictureBox1.Image);            
+            int brPixel;
 
+            for (int i = 0; i < image.Height; i++)                       
+            {
+                for (int j = 0; j < image.Width; j++)
+                {
+                    brPixel = (int)(255 * bmpCheck.GetPixel(i, j).GetBrightness());         //Получаем яркость пикселя
+
+                    if (brPixel > 255)          //Проверка на выход из диапазона
+                    {
+                        brPixel = 255;
+                    }
+                    else if (brPixel < 0)
+                    {
+                        brPixel = 0;
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+            /*           Bitmap bmpCheck = new Bitmap(pictureBox1.Image);
+                        int[,] arrayCheck = new int[bmpCheck.Width, bmpCheck.Height];            
+
+                        Color checkColor;
+
+                        for (int i = 0; i < image.Height; i++)           // Получаем значения яркости и записываем в массив                
+                        {
+                            for (int j = 0; j < image.Width; j++)
+                            {
+                                checkColor = bmpCheck.GetPixel(i, j);          // Получаем цвет пикселя
+                                arrayCheck[i, j] = Convert.ToInt32(checkColor.GetBrightness() * 255);
+                                if (arrayCheck[i, j] > 255)
+                                {
+                                    arrayCheck[i, j] = 255;
+                                }
+                                else if (arrayCheck[i, j] < 0)
+                                {
+                                    arrayCheck[i, j] = 0;
+                                }
+                            }
+                        }*/
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
