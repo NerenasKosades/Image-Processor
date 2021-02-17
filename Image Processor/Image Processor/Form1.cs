@@ -74,13 +74,16 @@ namespace Image_Processor
                 int[,] arrayBmp = new int[bmp.Width, bmp.Height];
                 int[] masY = new int[bmp.Width * bmp.Height];
                 int[] masX = new int[bmp.Width * bmp.Height];
-                
+
+                Color pixelColor;
 
                 for (int i = 0; i < image.Height; i++)           // Получаем значения яркости и записываем в массив                
                 {                    
                     for (int j = 0; j < image.Width; j++)
                     {
-                    arrayBmp[i, j] = ((image.GetPixel(i, j) == Color.Red ? 0 : 256) + (image.GetPixel(i, j) == Color.Green ? 0 : 256) + (image.GetPixel(i, j) == Color.Blue ? 0 : 256)) / 3;                        
+                    pixelColor = image.GetPixel(i, j);
+                    arrayBmp[i, j] = Convert.ToInt32(pixelColor.GetBrightness() * 256);
+                    //arrayBmp[i, j] = ((image.GetPixel(i, j) == Color.Red ? 0 : 256) + (image.GetPixel(i, j) == Color.Green ? 0 : 256) + (image.GetPixel(i, j) == Color.Blue ? 0 : 256)) / 3;                        
                     }
                 }
                
