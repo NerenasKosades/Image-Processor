@@ -121,7 +121,7 @@ namespace Image_Processor
             // 
             this.button3.Location = new System.Drawing.Point(436, 434);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(425, 52);
+            this.button3.Size = new System.Drawing.Size(425, 68);
             this.button3.TabIndex = 6;
             this.button3.Text = "Построить гистограмму";
             this.button3.UseVisualStyleBackColor = true;
@@ -135,7 +135,7 @@ namespace Image_Processor
             // 
             this.button4.Location = new System.Drawing.Point(19, 463);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(198, 23);
+            this.button4.Size = new System.Drawing.Size(198, 39);
             this.button4.TabIndex = 7;
             this.button4.Text = "Сброс на начальное изображение";
             this.button4.UseVisualStyleBackColor = true;
@@ -145,9 +145,9 @@ namespace Image_Processor
             // 
             this.button5.Location = new System.Drawing.Point(223, 463);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(206, 23);
+            this.button5.Size = new System.Drawing.Size(206, 39);
             this.button5.TabIndex = 8;
-            this.button5.Text = "Коррекция диапазона яркости";
+            this.button5.Text = "Принудительная коррекция цветового диапазона";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

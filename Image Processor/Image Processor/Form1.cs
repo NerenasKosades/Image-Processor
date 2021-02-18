@@ -14,8 +14,54 @@ namespace Image_Processor
     {      
         static Bitmap image;            //Рабочее изображение
         Bitmap startImage;          // Хранение стартового изображения   
-        
-       
+
+
+        public static Bitmap Check(Image bmpColor)             // Реализация функции проверки
+        /*
+         * Вызов метода осуществляется командой pictureBox1.Image = Check(pictureBox1.Image);
+         * Метод проверяет выход значения цветов по каналам за пределы диапазона от 0 до 255.
+         * В случае превышения - устанавливает 255.
+         * В случае ухода в отрицательные значения -устанавливает 0.
+         * Обязательно вызывать метод при обработке изображения до установки значения в пиксель - иначе возврат исключения.
+         * Обязательно проверять наличие загруженного изображения в pictureBox. (pictureBox.Image != null) - иначе возврат необработанного исключения NullException
+         * Перегрузка с одним параметром типа Image - Проверка изображения полнстью
+         */
+
+        {
+
+            Bitmap bmpCheck = new Bitmap(bmpColor);
+            int redColor;
+            int greenColor;
+            int blueColor;
+            Color pixelColor;
+
+            for (int i = 0; i < bmpColor.Height; i++)
+            {
+                for (int j = 0; j < bmpColor.Width; j++)
+                {
+                    redColor = bmpCheck.GetPixel(i, j).R;
+                    greenColor = bmpCheck.GetPixel(i, j).G;
+                    blueColor = bmpCheck.GetPixel(i, j).B;
+
+                    if (redColor > 255)
+                        redColor = 255;
+                    if (redColor < 0)
+                        redColor = 0;
+                    if (greenColor > 255)
+                        greenColor = 255;
+                    if (greenColor < 0)
+                        greenColor = 0;
+                    if (blueColor > 255)
+                        blueColor = 255;
+                    if (blueColor < 0)
+                        blueColor = 0;
+                    pixelColor = Color.FromArgb(255, redColor, greenColor, blueColor);
+                    bmpCheck.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));                   
+                }
+            }
+            return bmpCheck;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -126,63 +172,53 @@ namespace Image_Processor
            }
         }
 
-        private void button5_Click(object sender, EventArgs e)          //Реализация кнопки коррекции диапазона яркости
+        private void button5_Click(object sender, EventArgs e)          //Реализация кнопки принудительной коррекции диапазона яркости
         {
-            Bitmap bmpCheck = new Bitmap(pictureBox1.Image);            
-            int brPixel;
-
-            for (int i = 0; i < image.Height; i++)                       
+            Bitmap bmpCheck = new Bitmap(pictureBox1.Image);                       
+            int redColor;
+            int greenColor;
+            int blueColor;
+            Color pixelColor;
+            if (pictureBox1.Image != null)
             {
-                for (int j = 0; j < image.Width; j++)
+                for (int i = 0; i < image.Height; i++)
                 {
-                    brPixel = (int)(255 * bmpCheck.GetPixel(i, j).GetBrightness());         //Получаем яркость пикселя
+                    for (int j = 0; j < image.Width; j++)
+                    {
+                        redColor = bmpCheck.GetPixel(i, j).R;
+                        greenColor = bmpCheck.GetPixel(i, j).G;
+                        blueColor = bmpCheck.GetPixel(i, j).B;
 
-                    if (brPixel > 255)          //Проверка на выход из диапазона
-                    {
-                        brPixel = 255;
-                    }
-                    else if (brPixel < 0)
-                    {
-                        brPixel = 0;
+                        if (redColor > 255)
+                            redColor = 255;
+                        if (redColor < 0)
+                            redColor = 0;
+                        if (greenColor > 255)
+                            greenColor = 255;
+                        if (greenColor < 0)
+                            greenColor = 0;
+                        if (blueColor > 255)
+                            blueColor = 255;
+                        if (blueColor < 0)
+                            blueColor = 0;
+                        pixelColor = Color.FromArgb(255, redColor, greenColor, blueColor);
+                        bmpCheck.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));
+                        pictureBox1.Image = bmpCheck;
                     }
                 }
+
+                pictureBox1.Image = bmpCheck;
             }
-
-
-
-
-
-
-
-
-
-
-            /*           Bitmap bmpCheck = new Bitmap(pictureBox1.Image);
-                        int[,] arrayCheck = new int[bmpCheck.Width, bmpCheck.Height];            
-
-                        Color checkColor;
-
-                        for (int i = 0; i < image.Height; i++)           // Получаем значения яркости и записываем в массив                
-                        {
-                            for (int j = 0; j < image.Width; j++)
-                            {
-                                checkColor = bmpCheck.GetPixel(i, j);          // Получаем цвет пикселя
-                                arrayCheck[i, j] = Convert.ToInt32(checkColor.GetBrightness() * 255);
-                                if (arrayCheck[i, j] > 255)
-                                {
-                                    arrayCheck[i, j] = 255;
-                                }
-                                else if (arrayCheck[i, j] < 0)
-                                {
-                                    arrayCheck[i, j] = 0;
-                                }
-                            }
-                        }*/
+            else
+            {
+                MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+        
         private void label2_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
