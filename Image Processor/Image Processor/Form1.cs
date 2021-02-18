@@ -120,24 +120,29 @@ namespace Image_Processor
         {
             try
             {
-                Bitmap bmp = new Bitmap(pictureBox1.Image);
-                int[,] arrayBmp = new int[bmp.Width, bmp.Height];
-                int[] masY = new int[bmp.Width * bmp.Height];
-                int[] masX = new int[bmp.Width * bmp.Height];
+                Bitmap bmpGist = new Bitmap(pictureBox1.Image);
+                int redColor;
+                int greenColor;
+                int blueColor;
+                int[,] brightnesPixel = new int[bmpGist.Width, bmpGist.Height];
+                int[] masY = new int[bmpGist.Width * bmpGist.Height];
+                int[] masX = new int[bmpGist.Width * bmpGist.Height];
 
-                Color pixelColor;
-
-                for (int i = 0; i < image.Height; i++)           // Получаем значения яркости и записываем в массив                
+                for (int i = 0; i < bmpGist.Height; i++)
                 {
-                    for (int j = 0; j < image.Width; j++)
+                    for (int j = 0; j < bmpGist.Width; j++)
                     {
-                        pixelColor = bmp.GetPixel(i, j);          // Получаем цвет пикселя
-                        arrayBmp[i, j] = Convert.ToInt32(pixelColor.GetBrightness() * 255);         //Получаем яркость пикселя
-                                                                                                    //arrayBmp[i, j] = ((image.GetPixel(i, j) == Color.Red ? 0 : 256) + (image.GetPixel(i, j) == Color.Green ? 0 : 256) + (image.GetPixel(i, j) == Color.Blue ? 0 : 256)) / 3;                        
+                        redColor = bmpGist.GetPixel(i, j).R;                    //Получаем цвета
+                        greenColor = bmpGist.GetPixel(i, j).G;                  
+                        blueColor = bmpGist.GetPixel(i, j).B;                   
+                        redColor = Check(redColor);                             //Проверка диапазона
+                        greenColor = Check(greenColor);
+                        blueColor = Check(blueColor);
+
+                        brightnesPixel[i, j] = (int)(0.299 * redColor + 0.587 * greenColor + 0.114 * blueColor);                //Расчет яркости - формула взята отсюда https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D1%82%D0%B5%D0%BD%D0%BA%D0%B8_%D1%81%D0%B5%D1%80%D0%BE%D0%B3%D0%BE
                     }
                 }
-
-                for (int i = 0; i < bmp.Width * bmp.Height; i++)           // Заполняем ось X
+                for (int i = 0; i < bmpGist.Width * bmpGist.Height; i++)           // Заполняем ось X
                 {
                     masX[i] = i;
                 }
@@ -147,7 +152,7 @@ namespace Image_Processor
                 {
                     for (int j = 0; j < image.Width; j++)
                     {
-                        masY[count] = arrayBmp[i, j];
+                        masY[count] = brightnesPixel[i, j];
                         count++;
                     }
                 }
@@ -184,7 +189,7 @@ namespace Image_Processor
             int redColor;
             int greenColor;
             int blueColor;
-            Color pixelColor;
+            //Color pixelColor;
             if (pictureBox1.Image != null)
             {
                 for (int i = 0; i < image.Height; i++)
@@ -207,7 +212,7 @@ namespace Image_Processor
                             blueColor = 255;
                         if (blueColor < 0)
                             blueColor = 0;
-                        pixelColor = Color.FromArgb(255, redColor, greenColor, blueColor);
+                        //pixelColor = Color.FromArgb(255, redColor, greenColor, blueColor);
                         bmpCheck.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));
                         pictureBox1.Image = bmpCheck;
                     }
@@ -225,6 +230,45 @@ namespace Image_Processor
         private void label2_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void button6_Click(object sender, EventArgs e)          //Реализация инверсии
+        {
+            Bitmap invPixel = new Bitmap(pictureBox1.Image);
+            int redColor;
+            int greenColor;
+            int blueColor;
+            Color pixelColor;
+
+            if (pictureBox1.Image != null)
+            {
+                for (int i = 0; i < image.Height; i++)
+                {
+                    for (int j = 0; j < image.Width; j++)
+                    {
+                        redColor = invPixel.GetPixel(i, j).R;
+                        greenColor = invPixel.GetPixel(i, j).G;
+                        blueColor = invPixel.GetPixel(i, j).B;
+                        redColor = Check(redColor);
+                        greenColor = Check(greenColor);
+                        blueColor = Check(blueColor);
+
+                        redColor = 255 - redColor;
+                        greenColor = 255 - greenColor;
+                        blueColor = 255 - blueColor;
+
+                        pixelColor = Color.FromArgb(255, redColor, greenColor, blueColor);
+                        invPixel.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));
+                        pictureBox1.Image = invPixel;
+                    }
+                }
+
+                pictureBox1.Image = invPixel;
+            }
+            else
+            {
+                MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
