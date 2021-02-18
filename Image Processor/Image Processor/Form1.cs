@@ -15,18 +15,16 @@ namespace Image_Processor
         static Bitmap image;            //Рабочее изображение
         Bitmap startImage;          // Хранение стартового изображения   
 
-
-        public static Bitmap Check(Image bmpColor)             // Реализация функции проверки
-        /*
-         * Вызов метода осуществляется командой pictureBox1.Image = Check(pictureBox1.Image);
+        /* 
          * Метод проверяет выход значения цветов по каналам за пределы диапазона от 0 до 255.
          * В случае превышения - устанавливает 255.
          * В случае ухода в отрицательные значения -устанавливает 0.
          * Обязательно вызывать метод при обработке изображения до установки значения в пиксель - иначе возврат исключения.
          * Обязательно проверять наличие загруженного изображения в pictureBox. (pictureBox.Image != null) - иначе возврат необработанного исключения NullException
-         * Перегрузка с одним параметром типа Image - Проверка изображения полнстью
+         * Перегрузка с одним параметром типа Image - Проверка изображения полностью. Например pictureBox1.Image = Check(pictureBox1.Image)
+         * Перегрузка с одним целочисленным параметром - возвращает цвет в диапазон. Вызывать отдельно для каждого цвета.
          */
-
+        public static Bitmap Check(Image bmpColor)             // Реализация функции проверки
         {
 
             Bitmap bmpCheck = new Bitmap(bmpColor);
@@ -62,6 +60,14 @@ namespace Image_Processor
             return bmpCheck;
         }
 
+        public static int Check(int color)
+        {
+            if (color > 255)
+                color = 255;
+            if (color < 0)
+                color = 0;
+            return color;
+        }
         public Form1()
         {
             InitializeComponent();
@@ -157,7 +163,7 @@ namespace Image_Processor
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button4_Click(object sender, EventArgs e)          //Реализация кнопки сброса изображения к начальному
@@ -188,7 +194,7 @@ namespace Image_Processor
                         redColor = bmpCheck.GetPixel(i, j).R;
                         greenColor = bmpCheck.GetPixel(i, j).G;
                         blueColor = bmpCheck.GetPixel(i, j).B;
-
+                        
                         if (redColor > 255)
                             redColor = 255;
                         if (redColor < 0)
