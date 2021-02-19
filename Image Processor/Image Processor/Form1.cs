@@ -85,12 +85,11 @@ namespace Image_Processor
                 {
                     try
                     {
-                        image.Save(savedialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        pictureBox1.Image.Save(savedialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
                     }
                     catch
                     {
-                        MessageBox.Show("Сначала загрузите изображение", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -237,8 +236,7 @@ namespace Image_Processor
             Bitmap invPixel = new Bitmap(pictureBox1.Image);
             int redColor;
             int greenColor;
-            int blueColor;
-            Color pixelColor;
+            int blueColor;            
 
             if (pictureBox1.Image != null)
             {
@@ -256,8 +254,49 @@ namespace Image_Processor
                         redColor = 255 - redColor;
                         greenColor = 255 - greenColor;
                         blueColor = 255 - blueColor;
+                        
+                        invPixel.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));
+                        pictureBox1.Image = invPixel;
+                    }
+                }
 
-                        pixelColor = Color.FromArgb(255, redColor, greenColor, blueColor);
+                pictureBox1.Image = invPixel;
+            }
+            else
+            {
+                MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)          //Реализация бинаризации
+        {
+            Bitmap invPixel = new Bitmap(pictureBox1.Image);
+            int redColor;
+            int greenColor;
+            int blueColor;
+            int binPixel;
+
+            if (pictureBox1.Image != null)
+            {
+                for (int i = 0; i < image.Height; i++)
+                {
+                    for (int j = 0; j < image.Width; j++)
+                    {
+                        redColor = invPixel.GetPixel(i, j).R;
+                        greenColor = invPixel.GetPixel(i, j).G;
+                        blueColor = invPixel.GetPixel(i, j).B;
+
+                        binPixel = (int)((redColor + greenColor + blueColor) / 3);                       
+
+                        redColor = binPixel;
+                        greenColor = binPixel;
+                        blueColor = binPixel;
+
+                        redColor = Check(redColor);
+                        greenColor = Check(greenColor);
+                        blueColor = Check(blueColor);
+
+
                         invPixel.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));
                         pictureBox1.Image = invPixel;
                     }
