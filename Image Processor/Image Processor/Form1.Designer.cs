@@ -45,11 +45,23 @@ namespace Image_Processor
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.MT22 = new System.Windows.Forms.MaskedTextBox();
+            this.MT32 = new System.Windows.Forms.MaskedTextBox();
+            this.MT13 = new System.Windows.Forms.MaskedTextBox();
+            this.MT23 = new System.Windows.Forms.MaskedTextBox();
+            this.MT33 = new System.Windows.Forms.MaskedTextBox();
+            this.MT12 = new System.Windows.Forms.MaskedTextBox();
+            this.MT31 = new System.Windows.Forms.MaskedTextBox();
+            this.MT21 = new System.Windows.Forms.MaskedTextBox();
+            this.MT11 = new System.Windows.Forms.MaskedTextBox();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -161,10 +173,20 @@ namespace Image_Processor
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Location = new System.Drawing.Point(867, 25);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(403, 477);
+            this.groupBox1.Size = new System.Drawing.Size(403, 60);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Обработка эффектов";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(135, 22);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(117, 22);
+            this.button7.TabIndex = 1;
+            this.button7.Text = "Бинаризация";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -176,15 +198,106 @@ namespace Image_Processor
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // button7
+            // groupBox2
             // 
-            this.button7.Location = new System.Drawing.Point(135, 22);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(117, 23);
-            this.button7.TabIndex = 1;
-            this.button7.Text = "Бинаризация";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.groupBox2.Controls.Add(this.button8);
+            this.groupBox2.Controls.Add(this.MT22);
+            this.groupBox2.Controls.Add(this.MT32);
+            this.groupBox2.Controls.Add(this.MT13);
+            this.groupBox2.Controls.Add(this.MT23);
+            this.groupBox2.Controls.Add(this.MT33);
+            this.groupBox2.Controls.Add(this.MT12);
+            this.groupBox2.Controls.Add(this.MT31);
+            this.groupBox2.Controls.Add(this.MT21);
+            this.groupBox2.Controls.Add(this.MT11);
+            this.groupBox2.Location = new System.Drawing.Point(867, 91);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(402, 105);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Применение сверток";
+            // 
+            // MT22
+            // 
+            this.MT22.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.MT22.Location = new System.Drawing.Point(47, 45);
+            this.MT22.Mask = "####";
+            this.MT22.Name = "MT22";
+            this.MT22.Size = new System.Drawing.Size(29, 20);
+            this.MT22.TabIndex = 8;
+            // 
+            // MT32
+            // 
+            this.MT32.Location = new System.Drawing.Point(47, 71);
+            this.MT32.Mask = "####";
+            this.MT32.Name = "MT32";
+            this.MT32.Size = new System.Drawing.Size(29, 20);
+            this.MT32.TabIndex = 7;
+            // 
+            // MT13
+            // 
+            this.MT13.Location = new System.Drawing.Point(82, 19);
+            this.MT13.Mask = "####";
+            this.MT13.Name = "MT13";
+            this.MT13.Size = new System.Drawing.Size(29, 20);
+            this.MT13.TabIndex = 6;
+            // 
+            // MT23
+            // 
+            this.MT23.Location = new System.Drawing.Point(82, 45);
+            this.MT23.Mask = "####";
+            this.MT23.Name = "MT23";
+            this.MT23.Size = new System.Drawing.Size(29, 20);
+            this.MT23.TabIndex = 5;
+            // 
+            // MT33
+            // 
+            this.MT33.Location = new System.Drawing.Point(82, 71);
+            this.MT33.Mask = "####";
+            this.MT33.Name = "MT33";
+            this.MT33.Size = new System.Drawing.Size(29, 20);
+            this.MT33.TabIndex = 4;
+            // 
+            // MT12
+            // 
+            this.MT12.Location = new System.Drawing.Point(47, 19);
+            this.MT12.Mask = "####";
+            this.MT12.Name = "MT12";
+            this.MT12.Size = new System.Drawing.Size(29, 20);
+            this.MT12.TabIndex = 3;
+            // 
+            // MT31
+            // 
+            this.MT31.Location = new System.Drawing.Point(12, 71);
+            this.MT31.Mask = "####";
+            this.MT31.Name = "MT31";
+            this.MT31.Size = new System.Drawing.Size(29, 20);
+            this.MT31.TabIndex = 2;
+            // 
+            // MT21
+            // 
+            this.MT21.Location = new System.Drawing.Point(12, 45);
+            this.MT21.Mask = "####";
+            this.MT21.Name = "MT21";
+            this.MT21.Size = new System.Drawing.Size(29, 20);
+            this.MT21.TabIndex = 1;
+            // 
+            // MT11
+            // 
+            this.MT11.Location = new System.Drawing.Point(12, 19);
+            this.MT11.Mask = "####";
+            this.MT11.Name = "MT11";
+            this.MT11.Size = new System.Drawing.Size(29, 20);
+            this.MT11.TabIndex = 0;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(135, 19);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(99, 72);
+            this.button8.TabIndex = 9;
+            this.button8.Text = "Рассчитать";
+            this.button8.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -192,6 +305,7 @@ namespace Image_Processor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Image_Processor.Properties.Resources.Metal;
             this.ClientSize = new System.Drawing.Size(1282, 549);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -208,6 +322,8 @@ namespace Image_Processor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,6 +345,17 @@ namespace Image_Processor
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.MaskedTextBox MT11;
+        private System.Windows.Forms.MaskedTextBox MT22;
+        private System.Windows.Forms.MaskedTextBox MT32;
+        private System.Windows.Forms.MaskedTextBox MT13;
+        private System.Windows.Forms.MaskedTextBox MT23;
+        private System.Windows.Forms.MaskedTextBox MT33;
+        private System.Windows.Forms.MaskedTextBox MT12;
+        private System.Windows.Forms.MaskedTextBox MT31;
+        private System.Windows.Forms.MaskedTextBox MT21;
+        private System.Windows.Forms.Button button8;
     }
 }
 
