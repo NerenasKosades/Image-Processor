@@ -221,7 +221,7 @@ namespace Image_Processor
             // 
             this.MT22.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.MT22.Location = new System.Drawing.Point(47, 45);
-            this.MT22.Mask = "####";
+            this.MT22.Mask = "0";
             this.MT22.Name = "MT22";
             this.MT22.Size = new System.Drawing.Size(29, 20);
             this.MT22.TabIndex = 8;
@@ -229,7 +229,7 @@ namespace Image_Processor
             // MT32
             // 
             this.MT32.Location = new System.Drawing.Point(47, 71);
-            this.MT32.Mask = "####";
+            this.MT32.Mask = "0";
             this.MT32.Name = "MT32";
             this.MT32.Size = new System.Drawing.Size(29, 20);
             this.MT32.TabIndex = 7;
@@ -237,7 +237,7 @@ namespace Image_Processor
             // MT13
             // 
             this.MT13.Location = new System.Drawing.Point(82, 19);
-            this.MT13.Mask = "####";
+            this.MT13.Mask = "0";
             this.MT13.Name = "MT13";
             this.MT13.Size = new System.Drawing.Size(29, 20);
             this.MT13.TabIndex = 6;
@@ -245,7 +245,7 @@ namespace Image_Processor
             // MT23
             // 
             this.MT23.Location = new System.Drawing.Point(82, 45);
-            this.MT23.Mask = "####";
+            this.MT23.Mask = "0";
             this.MT23.Name = "MT23";
             this.MT23.Size = new System.Drawing.Size(29, 20);
             this.MT23.TabIndex = 5;
@@ -253,7 +253,7 @@ namespace Image_Processor
             // MT33
             // 
             this.MT33.Location = new System.Drawing.Point(82, 71);
-            this.MT33.Mask = "####";
+            this.MT33.Mask = "0";
             this.MT33.Name = "MT33";
             this.MT33.Size = new System.Drawing.Size(29, 20);
             this.MT33.TabIndex = 4;
@@ -261,7 +261,7 @@ namespace Image_Processor
             // MT12
             // 
             this.MT12.Location = new System.Drawing.Point(47, 19);
-            this.MT12.Mask = "####";
+            this.MT12.Mask = "0";
             this.MT12.Name = "MT12";
             this.MT12.Size = new System.Drawing.Size(29, 20);
             this.MT12.TabIndex = 3;
@@ -269,7 +269,7 @@ namespace Image_Processor
             // MT31
             // 
             this.MT31.Location = new System.Drawing.Point(12, 71);
-            this.MT31.Mask = "####";
+            this.MT31.Mask = "0";
             this.MT31.Name = "MT31";
             this.MT31.Size = new System.Drawing.Size(29, 20);
             this.MT31.TabIndex = 2;
@@ -277,7 +277,7 @@ namespace Image_Processor
             // MT21
             // 
             this.MT21.Location = new System.Drawing.Point(12, 45);
-            this.MT21.Mask = "####";
+            this.MT21.Mask = "0";
             this.MT21.Name = "MT21";
             this.MT21.Size = new System.Drawing.Size(29, 20);
             this.MT21.TabIndex = 1;
@@ -285,7 +285,7 @@ namespace Image_Processor
             // MT11
             // 
             this.MT11.Location = new System.Drawing.Point(12, 19);
-            this.MT11.Mask = "####";
+            this.MT11.Mask = "0";
             this.MT11.Name = "MT11";
             this.MT11.Size = new System.Drawing.Size(29, 20);
             this.MT11.TabIndex = 0;
@@ -298,6 +298,7 @@ namespace Image_Processor
             this.button8.TabIndex = 9;
             this.button8.Text = "Рассчитать";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // Form1
             // 

@@ -309,5 +309,148 @@ namespace Image_Processor
                 MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button8_Click(object sender, EventArgs e)          //Расчет сверток
+        {
+            string[,] stringConvolution = { { MT11.Text, MT12.Text, MT13.Text }, { MT21.Text, MT22.Text, MT23.Text }, { MT31.Text, MT32.Text, MT33.Text } };
+            int[,] convolution = new int[3, 3];
+            //try
+            //{
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        convolution[i, j] = Convert.ToInt32(stringConvolution[i, j]);
+                    }
+                }
+                if (pictureBox1.Image != null)
+                {
+                    for (int i = 0; i < 3; i++)         //Заполнение массива свертки
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            convolution[i, j] = Convert.ToInt32(stringConvolution[i, j]);
+                        }
+                    }
+
+                    Bitmap conColors = new Bitmap(pictureBox1.Image);
+
+                    int[,] redColor = new int[conColors.Width, conColors.Height];           //Создание массивов для получения цвета
+                    int[,] greenColor = new int[conColors.Width, conColors.Height];
+                    int[,] blueColor = new int[conColors.Width, conColors.Height];
+
+                    int[,] redColorPlus = new int[conColors.Width + 2, conColors.Height + 2];           //Создание массивов с увеличенным размером
+                    int[,] greenColorPlus = new int[conColors.Width + 2, conColors.Height + 2];
+                    int[,] blueColorPlus = new int[conColors.Width + 2, conColors.Height + 2];
+
+                    for (int i = 0; i < conColors.Width; i++)
+                    {
+                        for (int j = 0; j < conColors.Height; j++)
+                        {
+                            redColor[i, j] = conColors.GetPixel(i, j).R;            //Получение цветов и запись в массивы
+                            greenColor[i, j] = conColors.GetPixel(i, j).G;
+                            blueColor[i, j] = conColors.GetPixel(i, j).B;
+
+                            redColor[i, j] = Check(redColor[i, j]);                 //Проверка диапазонов
+                            greenColor[i, j] = Check(greenColor[i, j]);
+                            blueColor[i, j] = Check(blueColor[i, j]);
+                        }
+                    }
+                    int countW = 0;
+                    int countH = 0;
+                    for (int i = 1; i < conColors.Width + 2; i++)           //Заполнение центральной части массива
+                    {
+                        for (int j = 1; j < conColors.Height + 2; j++)
+                        {
+                            redColorPlus[i, j] = redColor[countW, countH];
+                            greenColorPlus[i, j] = greenColor[countW, countH];
+                            blueColorPlus[i, j] = blueColor[countW, countH];
+                            countW++;
+                            countH++;
+                        }
+                    }
+
+                    for (int i = 1; i < conColors.Width - 1; i++)
+                    {
+                        redColorPlus[1, i] = redColorPlus[2, i];            // Заполнение верхней строки
+                        greenColorPlus[1, i] = greenColorPlus[2, i];
+                        blueColorPlus[1, i] = blueColorPlus[2, i];
+
+                        redColorPlus[conColors.Height, i] = redColorPlus[conColors.Height - 1, i];          //Заполнение нижней строки
+                        greenColorPlus[conColors.Height, i] = greenColorPlus[conColors.Height - 1, i];
+                        blueColorPlus[conColors.Height, i] = blueColorPlus[conColors.Height - 1, i];
+                    }
+
+                    for (int j = 0; j < conColors.Height; j++)
+                    {
+                        redColorPlus[j, 1] = redColorPlus[j, conColors.Width + 1];          //Заполнение левого столбца
+                        greenColorPlus[j, 1] = greenColorPlus[j, conColors.Width + 1];
+                        blueColorPlus[j, 1] = blueColorPlus[j, conColors.Width + 1];
+
+                        redColorPlus[j, conColors.Width] = redColorPlus[j, conColors.Width - 1];
+                        greenColorPlus[j, conColors.Width] = greenColorPlus[j, conColors.Width - 1];
+                        blueColorPlus[j, conColors.Width] = blueColorPlus[j, conColors.Width - 1];
+                    }
+
+                    for (int i = 1; i < conColors.Width + 1; i++)
+                    {
+                        for (int j = 1; j < conColors.Height + 1; j++)
+                        {
+                            redColorPlus[i, j] = (redColorPlus[i - 1, j - 1] * convolution[1, 1]            //Проход сверткой по красному диапазону
+                                                + redColorPlus[i - 1, j] * convolution[1, 2]
+                                                + redColorPlus[i - 1, j + 1] * convolution[1, 3]
+                                                + redColorPlus[i, j - 1] * convolution[2, 1]
+                                                + redColorPlus[i, j] * convolution[2, 2]
+                                                + redColorPlus[i, j + 1] * convolution[2, 3]
+                                                + redColorPlus[i + 1, j - 1] * convolution[3, 1]
+                                                + redColorPlus[i + 1, j] * convolution[3, 2]
+                                                + redColorPlus[i + 1, j + 1] * convolution[3, 3]) / 9;
+
+                            greenColorPlus[i, j] = (greenColorPlus[i - 1, j - 1] * convolution[1, 1]            //Проход сверткой по зеленому диапазону
+                                               + greenColorPlus[i - 1, j] * convolution[1, 2]
+                                               + greenColorPlus[i - 1, j + 1] * convolution[1, 3]
+                                               + greenColorPlus[i, j - 1] * convolution[2, 1]
+                                               + greenColorPlus[i, j] * convolution[2, 2]
+                                               + greenColorPlus[i, j + 1] * convolution[2, 3]
+                                               + greenColorPlus[i + 1, j - 1] * convolution[3, 1]
+                                               + greenColorPlus[i + 1, j] * convolution[3, 2]
+                                               + greenColorPlus[i + 1, j + 1] * convolution[3, 3]) / 9;
+
+                            blueColorPlus[i, j] = (blueColorPlus[i - 1, j - 1] * convolution[1, 1]          //Проход сверткой по синему диапазону
+                                               + blueColorPlus[i - 1, j] * convolution[1, 2]
+                                               + blueColorPlus[i - 1, j + 1] * convolution[1, 3]
+                                               + blueColorPlus[i, j - 1] * convolution[2, 1]
+                                               + blueColorPlus[i, j] * convolution[2, 2]
+                                               + blueColorPlus[i, j + 1] * convolution[2, 3]
+                                               + blueColorPlus[i + 1, j - 1] * convolution[3, 1]
+                                               + blueColorPlus[i + 1, j] * convolution[3, 2]
+                                               + blueColorPlus[i + 1, j + 1] * convolution[3, 3]) / 9;
+
+                            redColorPlus[i, j] = Check(redColorPlus[i, j]);                                 //Проверка диапазонов
+                            greenColorPlus[i, j] = Check(greenColorPlus[i, j]);
+                            blueColorPlus[i, j] = Check(blueColorPlus[i, j]);
+                        }
+                    }
+
+                    for (int i = 1; i < conColors.Width + 1; i++)                           //Возврат цветов в экземпляр класса Bitmap
+                    {
+                        for (int j = 1; j < conColors.Height + 1; j++)
+                        {
+                            conColors.SetPixel(i, j, Color.FromArgb(255, redColorPlus[i, j], greenColorPlus[i, j], blueColorPlus[i, j]));
+                        }
+                    }
+
+                    pictureBox1.Image = conColors;
+                }
+                else
+                {
+                    MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Заполните все поля свертки корректно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+        }
     }
 }
