@@ -314,8 +314,7 @@ namespace Image_Processor
         {
             string[,] stringConvolution = { { MT11.Text, MT12.Text, MT13.Text }, { MT21.Text, MT22.Text, MT23.Text }, { MT31.Text, MT32.Text, MT33.Text } };
             int[,] convolution = new int[3, 3];
-            //try
-            //{
+          
                 for (int i = 0; i < 3; i++)
                 {
                     for (int j = 0; j < 3; j++)
@@ -356,17 +355,14 @@ namespace Image_Processor
                             blueColor[i, j] = Check(blueColor[i, j]);
                         }
                     }
-                    int countW = 0;
-                    int countH = 0;
-                    for (int i = 1; i < conColors.Width + 2; i++)           //Заполнение центральной части массива
+                    
+                    for (int i = 0; i < conColors.Width; i++)           //Заполнение центральной части массива
                     {
-                        for (int j = 1; j < conColors.Height + 2; j++)
+                        for (int j = 0; j < conColors.Height; j++)         
                         {
-                            redColorPlus[i, j] = redColor[countW, countH];
-                            greenColorPlus[i, j] = greenColor[countW, countH];
-                            blueColorPlus[i, j] = blueColor[countW, countH];
-                            countW++;
-                            countH++;
+                            redColorPlus[i + 1, j + 1] = redColor[i, j];
+                            greenColorPlus[i + 1, j + 1] = greenColor[i, j];
+                            blueColorPlus[i + 1, j + 1] = blueColor[i, j];
                         }
                     }
 
@@ -392,9 +388,9 @@ namespace Image_Processor
                         blueColorPlus[j, conColors.Width] = blueColorPlus[j, conColors.Width - 1];
                     }
 
-                    for (int i = 1; i < conColors.Width + 1; i++)
+                    for (int i = 1; i < conColors.Width + 3; i++)
                     {
-                        for (int j = 1; j < conColors.Height + 1; j++)
+                        for (int j = 1; j < conColors.Height + 3; j++)
                         {
                             redColorPlus[i, j] = (redColorPlus[i - 1, j - 1] * convolution[1, 1]            //Проход сверткой по красному диапазону
                                                 + redColorPlus[i - 1, j] * convolution[1, 2]
@@ -432,11 +428,21 @@ namespace Image_Processor
                         }
                     }
 
-                    for (int i = 1; i < conColors.Width + 1; i++)                           //Возврат цветов в экземпляр класса Bitmap
+                    for (int i = 0; i < conColors.Width + 2; i++)           
                     {
-                        for (int j = 1; j < conColors.Height + 1; j++)
+                        for (int j = 0; j < conColors.Height + 2; j++)
                         {
-                            conColors.SetPixel(i, j, Color.FromArgb(255, redColorPlus[i, j], greenColorPlus[i, j], blueColorPlus[i, j]));
+                            redColor[i, j] = redColorPlus[i + 1, j + 1];            //Возврат значений в массивы
+                            greenColor[i, j] = greenColorPlus[i + 1, j + 1];
+                            blueColor[i, j] = blueColorPlus[i + 1, j + 1];
+                        }
+                    }
+
+                    for (int i = 0; i < conColors.Width; i++)                           //Возврат цветов в экземпляр класса Bitmap
+                    {
+                        for (int j = 0; j < conColors.Height; j++)
+                        {
+                            conColors.SetPixel(i, j, Color.FromArgb(255, redColor[i, j], greenColor[i, j], blueColor[i, j]));
                         }
                     }
 
@@ -445,12 +451,8 @@ namespace Image_Processor
                 else
                 {
                     MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Заполните все поля свертки корректно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                }           
         }
     }
 }
+//Не забудь обработать исключение при пустых масках
