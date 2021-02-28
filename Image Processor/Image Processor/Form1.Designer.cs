@@ -71,6 +71,30 @@ namespace Image_Processor
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox5 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox6 = new System.Windows.Forms.MaskedTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -78,6 +102,7 @@ namespace Image_Processor
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -154,7 +179,7 @@ namespace Image_Processor
             // 
             this.button3.Location = new System.Drawing.Point(436, 434);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(641, 68);
+            this.button3.Size = new System.Drawing.Size(641, 23);
             this.button3.TabIndex = 6;
             this.button3.Text = "Построить гистограмму";
             this.button3.UseVisualStyleBackColor = true;
@@ -190,7 +215,7 @@ namespace Image_Processor
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Location = new System.Drawing.Point(223, 508);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(207, 105);
+            this.groupBox1.Size = new System.Drawing.Size(207, 114);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Обработка эффектов";
@@ -229,7 +254,7 @@ namespace Image_Processor
             this.groupBox2.Controls.Add(this.MT21);
             this.groupBox2.Location = new System.Drawing.Point(19, 508);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(198, 105);
+            this.groupBox2.Size = new System.Drawing.Size(198, 114);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Применение сверток";
@@ -369,19 +394,253 @@ namespace Image_Processor
             // 
             // groupBox3
             // 
-            this.groupBox3.Location = new System.Drawing.Point(436, 508);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.maskedTextBox4);
+            this.groupBox3.Controls.Add(this.maskedTextBox5);
+            this.groupBox3.Controls.Add(this.maskedTextBox6);
+            this.groupBox3.Controls.Add(this.maskedTextBox3);
+            this.groupBox3.Controls.Add(this.maskedTextBox2);
+            this.groupBox3.Controls.Add(this.maskedTextBox1);
+            this.groupBox3.Location = new System.Drawing.Point(436, 463);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(641, 105);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ввод параметров распределений";
             // 
+            // maskedTextBox1
+            // 
+            this.maskedTextBox1.Location = new System.Drawing.Point(38, 27);
+            this.maskedTextBox1.Mask = "000";
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox1.TabIndex = 1;
+            // 
+            // maskedTextBox2
+            // 
+            this.maskedTextBox2.Location = new System.Drawing.Point(38, 53);
+            this.maskedTextBox2.Mask = "000";
+            this.maskedTextBox2.Name = "maskedTextBox2";
+            this.maskedTextBox2.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox2.TabIndex = 2;
+            // 
+            // maskedTextBox3
+            // 
+            this.maskedTextBox3.Location = new System.Drawing.Point(38, 79);
+            this.maskedTextBox3.Mask = "#0.00";
+            this.maskedTextBox3.Name = "maskedTextBox3";
+            this.maskedTextBox3.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox3.TabIndex = 3;
+            // 
+            // maskedTextBox4
+            // 
+            this.maskedTextBox4.Location = new System.Drawing.Point(346, 79);
+            this.maskedTextBox4.Mask = "#0.00";
+            this.maskedTextBox4.Name = "maskedTextBox4";
+            this.maskedTextBox4.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox4.TabIndex = 6;
+            // 
+            // maskedTextBox5
+            // 
+            this.maskedTextBox5.Location = new System.Drawing.Point(346, 53);
+            this.maskedTextBox5.Mask = "000";
+            this.maskedTextBox5.Name = "maskedTextBox5";
+            this.maskedTextBox5.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox5.TabIndex = 5;
+            // 
+            // maskedTextBox6
+            // 
+            this.maskedTextBox6.Location = new System.Drawing.Point(346, 27);
+            this.maskedTextBox6.Mask = "000";
+            this.maskedTextBox6.Name = "maskedTextBox6";
+            this.maskedTextBox6.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox6.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(26, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "fmin";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 56);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "fmax";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 82);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(13, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "a";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(311, 82);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(13, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "k";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(311, 56);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "gmax";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(311, 30);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "gmin";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(73, 56);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(206, 13);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "- макс. яркость входного изображения";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(73, 30);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(200, 13);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "- мин. яркость входного изображения";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(381, 56);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(214, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "- макс. яркость выходного изображения";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(381, 30);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(208, 13);
+            this.label12.TabIndex = 16;
+            this.label12.Text = "- мин. яркость выходного изображения";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(381, 82);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(116, 13);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "- показатель степени";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(73, 82);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(140, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "- некоторый коэффициент";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(435, 574);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(103, 48);
+            this.button9.TabIndex = 13;
+            this.button9.Text = "Равномерное распределение";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(544, 574);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(103, 48);
+            this.button10.TabIndex = 14;
+            this.button10.Text = "Экспоненциаль- ное распределение";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(653, 574);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(103, 48);
+            this.button11.TabIndex = 15;
+            this.button11.Text = "Распределение Рэлея";
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(974, 574);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(103, 48);
+            this.button12.TabIndex = 18;
+            this.button12.Text = "Степенная интенсификация";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(868, 574);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(103, 48);
+            this.button13.TabIndex = 17;
+            this.button13.Text = "Гиперболичес- кое распределение";
+            this.button13.UseVisualStyleBackColor = true;
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(762, 574);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(103, 48);
+            this.button14.TabIndex = 16;
+            this.button14.Text = "Распределение степени 2/3";
+            this.button14.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Image_Processor.Properties.Resources.Metal;
-            this.ClientSize = new System.Drawing.Size(1084, 638);
+            this.ClientSize = new System.Drawing.Size(1094, 642);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.chart4);
             this.Controls.Add(this.chart3);
@@ -408,6 +667,8 @@ namespace Image_Processor
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,6 +705,30 @@ namespace Image_Processor
         private System.Windows.Forms.DataVisualization.Charting.Chart chart3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart4;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox4;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox5;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox6;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox3;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
     }
 }
 

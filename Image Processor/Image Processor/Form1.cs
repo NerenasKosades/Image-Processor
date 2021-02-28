@@ -207,7 +207,8 @@ namespace Image_Processor
             int redColor;
             int greenColor;
             int blueColor;
-            //Color pixelColor;
+            
+
             if (pictureBox1.Image != null)
             {
                 for (int i = 0; i < image.Height; i++)
@@ -230,7 +231,7 @@ namespace Image_Processor
                             blueColor = 255;
                         if (blueColor < 0)
                             blueColor = 0;
-                        //pixelColor = Color.FromArgb(255, redColor, greenColor, blueColor);
+                        
                         bmpCheck.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));
                         pictureBox1.Image = bmpCheck;
                     }
@@ -252,13 +253,15 @@ namespace Image_Processor
 
         private void button6_Click(object sender, EventArgs e)          //Реализация инверсии
         {
-            Bitmap invPixel = new Bitmap(pictureBox1.Image);
-            int redColor;
-            int greenColor;
-            int blueColor;            
+                       
 
             if (pictureBox1.Image != null)
             {
+                Bitmap invPixel = new Bitmap(pictureBox1.Image);
+                int redColor;
+                int greenColor;
+                int blueColor;
+
                 for (int i = 0; i < image.Height; i++)
                 {
                     for (int j = 0; j < image.Width; j++)
@@ -289,15 +292,16 @@ namespace Image_Processor
 
         private void button7_Click(object sender, EventArgs e)          //Реализация бинаризации
         {
-            Bitmap invPixel = new Bitmap(pictureBox1.Image);
-            int redColor;
-            int greenColor;
-            int blueColor;
-            int binPixel;
+           
 
 
             if (pictureBox1.Image != null)
             {
+                Bitmap invPixel = new Bitmap(pictureBox1.Image);
+                int redColor;
+                int greenColor;
+                int blueColor;
+                int binPixel;
                 for (int i = 0; i < image.Height; i++)
                 {
                     for (int j = 0; j < image.Width; j++)
