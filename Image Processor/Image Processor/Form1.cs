@@ -388,39 +388,39 @@ namespace Image_Processor
                         blueColorPlus[j, conColors.Width] = blueColorPlus[j, conColors.Width - 1];
                     }
 
-                    for (int i = 1; i < conColors.Width + 3; i++)
+                    for (int i = 1; i <= conColors.Width; i++) //Значение conColor.Width = 256, если оставить i < conColor.Width+3 то на 257 шаге ругнется что индекс за пределами  
+                {
+                        for (int j = 1; j <= conColors.Height; j++) //Значение conColor.Height = 256, если оставить i < conColor.Height+2 то на 257 шаге ругнется что индекс за пределами    
                     {
-                        for (int j = 1; j < conColors.Height + 3; j++)
-                        {
-                            redColorPlus[i, j] = (redColorPlus[i - 1, j - 1] * convolution[1, 1]            //Проход сверткой по красному диапазону
-                                                + redColorPlus[i - 1, j] * convolution[1, 2]
-                                                + redColorPlus[i - 1, j + 1] * convolution[1, 3]
-                                                + redColorPlus[i, j - 1] * convolution[2, 1]
-                                                + redColorPlus[i, j] * convolution[2, 2]
-                                                + redColorPlus[i, j + 1] * convolution[2, 3]
-                                                + redColorPlus[i + 1, j - 1] * convolution[3, 1]
-                                                + redColorPlus[i + 1, j] * convolution[3, 2]
-                                                + redColorPlus[i + 1, j + 1] * convolution[3, 3]) / 9;
+                            redColorPlus[i, j] = (redColorPlus[i - 1, j - 1] * convolution[0, 0]            //Проход сверткой по красному диапазону
+                                                + redColorPlus[i - 1, j] * convolution[0, 1]                // Значения в массиве convolution ничинаются с 0, тоесть от [0,0] до [2,2]
+                                                + redColorPlus[i - 1, j + 1] * convolution[0, 2]
+                                                + redColorPlus[i, j - 1] * convolution[1, 0]
+                                                + redColorPlus[i, j] * convolution[1, 1]
+                                                + redColorPlus[i, j + 1] * convolution[1, 2]
+                                                + redColorPlus[i + 1, j - 1] * convolution[2, 0]
+                                                + redColorPlus[i + 1, j] * convolution[2, 1]
+                                                + redColorPlus[i + 1, j + 1] * convolution[2, 2]) / 9;
 
-                            greenColorPlus[i, j] = (greenColorPlus[i - 1, j - 1] * convolution[1, 1]            //Проход сверткой по зеленому диапазону
-                                               + greenColorPlus[i - 1, j] * convolution[1, 2]
-                                               + greenColorPlus[i - 1, j + 1] * convolution[1, 3]
-                                               + greenColorPlus[i, j - 1] * convolution[2, 1]
-                                               + greenColorPlus[i, j] * convolution[2, 2]
-                                               + greenColorPlus[i, j + 1] * convolution[2, 3]
-                                               + greenColorPlus[i + 1, j - 1] * convolution[3, 1]
-                                               + greenColorPlus[i + 1, j] * convolution[3, 2]
-                                               + greenColorPlus[i + 1, j + 1] * convolution[3, 3]) / 9;
+                            greenColorPlus[i, j] = (greenColorPlus[i - 1, j - 1] * convolution[0, 0]            //Проход сверткой по зеленому диапазону
+                                               + greenColorPlus[i - 1, j] * convolution[0, 1]
+                                               + greenColorPlus[i - 1, j + 1] * convolution[0, 2]
+                                               + greenColorPlus[i, j - 1] * convolution[1, 0]
+                                               + greenColorPlus[i, j] * convolution[1, 1]
+                                               + greenColorPlus[i, j + 1] * convolution[1, 2]
+                                               + greenColorPlus[i + 1, j - 1] * convolution[2, 0]
+                                               + greenColorPlus[i + 1, j] * convolution[2, 1]
+                                               + greenColorPlus[i + 1, j + 1] * convolution[2, 2]) / 9;
 
-                            blueColorPlus[i, j] = (blueColorPlus[i - 1, j - 1] * convolution[1, 1]          //Проход сверткой по синему диапазону
-                                               + blueColorPlus[i - 1, j] * convolution[1, 2]
-                                               + blueColorPlus[i - 1, j + 1] * convolution[1, 3]
-                                               + blueColorPlus[i, j - 1] * convolution[2, 1]
-                                               + blueColorPlus[i, j] * convolution[2, 2]
-                                               + blueColorPlus[i, j + 1] * convolution[2, 3]
-                                               + blueColorPlus[i + 1, j - 1] * convolution[3, 1]
-                                               + blueColorPlus[i + 1, j] * convolution[3, 2]
-                                               + blueColorPlus[i + 1, j + 1] * convolution[3, 3]) / 9;
+                            blueColorPlus[i, j] = (blueColorPlus[i - 1, j - 1] * convolution[0, 0]          //Проход сверткой по синему диапазону
+                                               + blueColorPlus[i - 1, j] * convolution[0, 1]
+                                               + blueColorPlus[i - 1, j + 1] * convolution[0, 2]
+                                               + blueColorPlus[i, j - 1] * convolution[1, 0]
+                                               + blueColorPlus[i, j] * convolution[1, 1]
+                                               + blueColorPlus[i, j + 1] * convolution[1, 2]
+                                               + blueColorPlus[i + 1, j - 1] * convolution[2, 0]
+                                               + blueColorPlus[i + 1, j] * convolution[2, 1]
+                                               + blueColorPlus[i + 1, j + 1] * convolution[2, 2]) / 9;
 
                             redColorPlus[i, j] = Check(redColorPlus[i, j]);                                 //Проверка диапазонов
                             greenColorPlus[i, j] = Check(greenColorPlus[i, j]);
@@ -428,10 +428,10 @@ namespace Image_Processor
                         }
                     }
 
-                    for (int i = 0; i < conColors.Width + 2; i++)           
+                    for (int i = 0; i < conColors.Width; i++) //Значение conColor.Width = 256, если оставить i < conColor.Width+2 то на 257 шаге ругнется что индекс за пределами          
                     {
-                        for (int j = 0; j < conColors.Height + 2; j++)
-                        {
+                        for (int j = 0; j < conColors.Height; j++) //Значение conColor.Height = 256, если оставить i < conColor.Height+2 то на 257 шаге ругнется что индекс за пределами          
+                    {
                             redColor[i, j] = redColorPlus[i + 1, j + 1];            //Возврат значений в массивы
                             greenColor[i, j] = greenColorPlus[i + 1, j + 1];
                             blueColor[i, j] = blueColorPlus[i + 1, j + 1];
