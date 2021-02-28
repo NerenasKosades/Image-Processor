@@ -276,6 +276,7 @@ namespace Image_Processor
             int blueColor;
             int binPixel;
 
+
             if (pictureBox1.Image != null)
             {
                 for (int i = 0; i < image.Height; i++)
@@ -312,9 +313,11 @@ namespace Image_Processor
 
         private void button8_Click(object sender, EventArgs e)          //Расчет сверток
         {
-            string[,] stringConvolution = { { MT11.Text, MT12.Text, MT13.Text }, { MT21.Text, MT22.Text, MT23.Text }, { MT31.Text, MT32.Text, MT33.Text } };
-            int[,] convolution = new int[3, 3];
-          
+            try
+            {
+                string[,] stringConvolution = { { MT11.Text, MT12.Text, MT13.Text }, { MT21.Text, MT22.Text, MT23.Text }, { MT31.Text, MT32.Text, MT33.Text } };
+                int[,] convolution = new int[3, 3];
+
                 for (int i = 0; i < 3; i++)
                 {
                     for (int j = 0; j < 3; j++)
@@ -355,10 +358,10 @@ namespace Image_Processor
                             blueColor[i, j] = Check(blueColor[i, j]);
                         }
                     }
-                    
+
                     for (int i = 0; i < conColors.Width; i++)           //Заполнение центральной части массива
                     {
-                        for (int j = 0; j < conColors.Height; j++)         
+                        for (int j = 0; j < conColors.Height; j++)
                         {
                             redColorPlus[i + 1, j + 1] = redColor[i, j];
                             greenColorPlus[i + 1, j + 1] = greenColor[i, j];
@@ -389,9 +392,9 @@ namespace Image_Processor
                     }
 
                     for (int i = 1; i <= conColors.Width; i++) //Значение conColor.Width = 256, если оставить i < conColor.Width+3 то на 257 шаге ругнется что индекс за пределами  
-                {
-                        for (int j = 1; j <= conColors.Height; j++) //Значение conColor.Height = 256, если оставить i < conColor.Height+2 то на 257 шаге ругнется что индекс за пределами    
                     {
+                        for (int j = 1; j <= conColors.Height; j++) //Значение conColor.Height = 256, если оставить i < conColor.Height+2 то на 257 шаге ругнется что индекс за пределами    
+                        {
                             redColorPlus[i, j] = (redColorPlus[i - 1, j - 1] * convolution[0, 0]            //Проход сверткой по красному диапазону
                                                 + redColorPlus[i - 1, j] * convolution[0, 1]                // Значения в массиве convolution ничинаются с 0, тоесть от [0,0] до [2,2]
                                                 + redColorPlus[i - 1, j + 1] * convolution[0, 2]
@@ -431,7 +434,7 @@ namespace Image_Processor
                     for (int i = 0; i < conColors.Width; i++) //Значение conColor.Width = 256, если оставить i < conColor.Width+2 то на 257 шаге ругнется что индекс за пределами          
                     {
                         for (int j = 0; j < conColors.Height; j++) //Значение conColor.Height = 256, если оставить i < conColor.Height+2 то на 257 шаге ругнется что индекс за пределами          
-                    {
+                        {
                             redColor[i, j] = redColorPlus[i + 1, j + 1];            //Возврат значений в массивы
                             greenColor[i, j] = greenColorPlus[i + 1, j + 1];
                             blueColor[i, j] = blueColorPlus[i + 1, j + 1];
@@ -451,7 +454,12 @@ namespace Image_Processor
                 else
                 {
                     MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }           
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Не заполнены поля свертки или не загружено изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
