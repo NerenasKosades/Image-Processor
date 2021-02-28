@@ -18,7 +18,7 @@ namespace Image_Processor
         /* 
          * Метод проверяет выход значения цветов по каналам за пределы диапазона от 0 до 255.
          * В случае превышения - устанавливает 255.
-         * В случае ухода в отрицательные значения -устанавливает 0.
+         * В случае ухода в отрицательные значения - устанавливает 0.
          * Обязательно вызывать метод при обработке изображения до установки значения в пиксель - иначе возврат исключения.
          * Обязательно проверять наличие загруженного изображения в pictureBox. (pictureBox.Image != null) - иначе возврат необработанного исключения NullException
          * Перегрузка с одним параметром типа Image - Проверка изображения полностью. Например pictureBox1.Image = Check(pictureBox1.Image)
@@ -123,9 +123,16 @@ namespace Image_Processor
                 int redColor;
                 int greenColor;
                 int blueColor;
-                int[,] brightnesPixel = new int[bmpGist.Width, bmpGist.Height];
-                int[] masY = new int[bmpGist.Width * bmpGist.Height];
-                int[] masX = new int[bmpGist.Width * bmpGist.Height];
+                int[,] brightnesPixel = new int[bmpGist.Width, bmpGist.Height];         //Массив яркости 
+                int[,] RedPixel = new int[bmpGist.Width, bmpGist.Height];               //Массив красного цвета 
+                int[,] GreenPixel = new int[bmpGist.Width, bmpGist.Height];             //Массив зеленого цвета 
+                int[,] BluePixel = new int[bmpGist.Width, bmpGist.Height];              //Массив синего цвета 
+                int[] masY = new int[bmpGist.Width * bmpGist.Height];                   //Массив оси Y для гистограммы яркости
+                int[] masX = new int[bmpGist.Width * bmpGist.Height];                   //Массив оси X 
+                int[] masYRed = new int[bmpGist.Width * bmpGist.Height];                //Массив оси X для красного цвета
+                int[] masYGreen = new int[bmpGist.Width * bmpGist.Height];              //Массив оси X для зеленого цвета
+                int[] masYBlue = new int[bmpGist.Width * bmpGist.Height];               //Массив оси X для синего цвета
+
 
                 for (int i = 0; i < bmpGist.Height; i++)
                 {
@@ -133,12 +140,17 @@ namespace Image_Processor
                     {
                         redColor = bmpGist.GetPixel(i, j).R;                    //Получаем цвета
                         greenColor = bmpGist.GetPixel(i, j).G;                  
-                        blueColor = bmpGist.GetPixel(i, j).B;                   
+                        blueColor = bmpGist.GetPixel(i, j).B;      
+                        
                         redColor = Check(redColor);                             //Проверка диапазона
                         greenColor = Check(greenColor);
                         blueColor = Check(blueColor);
 
-                        brightnesPixel[i, j] = (int)(0.299 * redColor + 0.587 * greenColor + 0.114 * blueColor);                //Расчет яркости - формула взята отсюда https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D1%82%D0%B5%D0%BD%D0%BA%D0%B8_%D1%81%D0%B5%D1%80%D0%BE%D0%B3%D0%BE
+                        RedPixel[i, j] = redColor;                              //Заполняем массивы цветов 
+                        GreenPixel[i, j] = greenColor;
+                        BluePixel[i, j] = blueColor;
+
+                        brightnesPixel[i, j] = (int)(0.299 * redColor + 0.587 * greenColor + 0.114 * blueColor);                //Расчет яркости - формула взята отсюда https://ru.wikipedia.org
                     }
                 }
                 for (int i = 0; i < bmpGist.Width * bmpGist.Height; i++)           // Заполняем ось X
@@ -152,11 +164,18 @@ namespace Image_Processor
                     for (int j = 0; j < image.Width; j++)
                     {
                         masY[count] = brightnesPixel[i, j];
+                        masYRed[count] = RedPixel[i, j];
+                        masYGreen[count] = GreenPixel[i, j];
+                        masYBlue[count] = BluePixel[i, j];
+
                         count++;
                     }
                 }
 
-                this.chart1.Series["Series1"].Points.DataBindXY(masX, masY);    // Построение гистограммы
+                this.chart1.Series["Series1"].Points.DataBindXY(masX, masY);    // Построение гистограммы яркости
+                this.chart2.Series["Series1"].Points.DataBindXY(masX, masYRed);    // Построение гистограммы красного цвета
+                this.chart3.Series["Series1"].Points.DataBindXY(masX, masYGreen);    // Построение гистограммы зеленого цвета
+                this.chart4.Series["Series1"].Points.DataBindXY(masX, masYBlue);    // Построение гистограммы синего цвета
             }
             catch
             {
