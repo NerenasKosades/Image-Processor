@@ -11,9 +11,62 @@ using System.Windows.Forms;
 namespace Image_Processor
 {
     public partial class Form1 : Form
-    {      
-        static Bitmap image;            //Рабочее изображение
-        Bitmap startImage;          // Хранение стартового изображения   
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        static Bitmap image;                //Рабочее изображение
+        Bitmap startImage;                  // Хранение стартового изображения   
+        int fMax, fMin, gMax, gMin;         //  Глобальные переменные для
+        double alfa, power;                 //  для рассчета распределений
+
+        private void button1_Click(object sender, EventArgs e)          //Реализация кнопки загрузки изображения
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "BitMap Files()*.bmp|*.bmp";
+            if (openDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    image = new Bitmap(openDialog.FileName);
+                    pictureBox1.Image = image;
+                    pictureBox1.Invalidate();
+                    startImage = image;
+                }
+                catch
+                {
+                    DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public static double Frequency(int[,] colorArray, int color)    //Метод расчета частости
+        {
+            int count = 0;
+            for (int i = 0; i < colorArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < colorArray.GetLength(1); j++)
+                {
+                    if (colorArray[i, j] == color)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return color / count;
+        }
+
 
         /* 
          * Метод проверяет выход значения цветов по каналам за пределы диапазона от 0 до 255.
@@ -68,11 +121,7 @@ namespace Image_Processor
                 color = 0;
             return color;
         }
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
+        
         private void button2_Click(object sender, EventArgs e)          //Реализация кнопки сохранения изображения
         {
             {
@@ -94,27 +143,7 @@ namespace Image_Processor
                 }
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)          //Реализация кнопки загрузки изображения
-        {
-            OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.Filter = "BitMap Files()*.bmp|*.bmp";
-            if (openDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    image = new Bitmap(openDialog.FileName);
-                    pictureBox1.Image = image;
-                    pictureBox1.Invalidate();
-                    startImage = image;
-                }
-                catch
-                {
-                    DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
+        
         private void button3_Click(object sender, EventArgs e)          //Реализация кнопки построения гистограммы
         {
             try
@@ -183,12 +212,7 @@ namespace Image_Processor
             }
 
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
+           
         private void button4_Click(object sender, EventArgs e)          //Реализация кнопки сброса изображения к начальному
         {
            if(pictureBox1.Image != null)             
@@ -245,10 +269,22 @@ namespace Image_Processor
             }
         }
 
-        
-        private void label2_Click(object sender, EventArgs e)
+        private void button15_Click(object sender, EventArgs e)         //Кнопка ввода исходных данных 
         {
-            
+            try
+            {                
+                fMin = Convert.ToInt32(maskedTextBox1.Text);
+                fMax = Convert.ToInt32(maskedTextBox2.Text);
+                gMin = Convert.ToInt32(maskedTextBox4.Text);
+                gMax = Convert.ToInt32(maskedTextBox5.Text);
+                alfa = Convert.ToDouble(maskedTextBox3.Text);
+                power = Convert.ToDouble(maskedTextBox6.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Корректно заполните поля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void button6_Click(object sender, EventArgs e)          //Реализация инверсии
@@ -278,7 +314,7 @@ namespace Image_Processor
                         blueColor = 255 - blueColor;
                         
                         invPixel.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));
-                        pictureBox1.Image = invPixel;
+                        
                     }
                 }
 
@@ -292,9 +328,6 @@ namespace Image_Processor
 
         private void button7_Click(object sender, EventArgs e)          //Реализация бинаризации
         {
-           
-
-
             if (pictureBox1.Image != null)
             {
                 Bitmap invPixel = new Bitmap(pictureBox1.Image);
@@ -320,9 +353,7 @@ namespace Image_Processor
                         greenColor = Check(greenColor);
                         blueColor = Check(blueColor);
 
-
-                        invPixel.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));
-                        pictureBox1.Image = invPixel;
+                        invPixel.SetPixel(i, j, Color.FromArgb(255, redColor, greenColor, blueColor));                       
                     }
                 }
 
@@ -334,7 +365,7 @@ namespace Image_Processor
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)          //Расчет сверток
+        private void button8_Click(object sender, EventArgs e)          //Расcчет сверток
         {
             try
             {
@@ -484,6 +515,45 @@ namespace Image_Processor
                 MessageBox.Show("Не заполнены поля свертки или не загружено изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button9_Click(object sender, EventArgs e)              //Рассчет равномерного распределения(Even distribution)
+        {
+            try
+            {
+                Bitmap Freq = new Bitmap(pictureBox1.Image);
+
+                int[,] redArray = new int[Freq.Height, Freq.Width];
+                int[,] greenArray = new int[Freq.Height, Freq.Width];
+                int[,] blueArray = new int[Freq.Height, Freq.Width];
+                                
+                for (int i = 0; i < Freq.Height; i++)
+                {
+                    for (int j = 0; j < Freq.Width; j++)
+                    {
+                        redArray[i, j] = Freq.GetPixel(i, j).R;
+                        greenArray[i, j] = Freq.GetPixel(i, j).G;
+                        blueArray[i, j] = Freq.GetPixel(i, j).B;
+
+                        redArray[i, j] = (gMax - gMin) * Convert.ToInt32(Frequency(redArray, redArray[i, j])) * gMin;
+                        greenArray[i, j] = (gMax - gMin) * Convert.ToInt32(Frequency(greenArray, greenArray[i, j])) * gMin;
+                        blueArray[i, j] = (gMax - gMin) * Convert.ToInt32(Frequency(blueArray, blueArray[i, j])) * gMin;
+
+                        redArray[i, j] = Check(redArray[i, j]);
+                        greenArray[i, j] = Check(greenArray[i, j]);
+                        blueArray[i, j] = Check(blueArray[i, j]);
+
+                        Freq.SetPixel(i, j, Color.FromArgb(255, redArray[i, j], greenArray[i, j], blueArray[i, j]));                        
+                    }
+                }
+                pictureBox1.Image = Freq;
+            }
+            catch
+            {
+                MessageBox.Show("Заполните поля и нажмите ОК, загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
 //Не забудь обработать исключение при пустых масках
+//Не забудь делать проверку диапазонов
+//redColor = Convert.ToInt32((gMax - gMin) * redFrequency + gMin);    //Обработка пикселей

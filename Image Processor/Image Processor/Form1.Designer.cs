@@ -58,37 +58,38 @@ namespace Image_Processor
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button8 = new System.Windows.Forms.Button();
-            this.MT22 = new System.Windows.Forms.MaskedTextBox();
-            this.MT32 = new System.Windows.Forms.MaskedTextBox();
+            this.MT11 = new System.Windows.Forms.MaskedTextBox();
             this.MT13 = new System.Windows.Forms.MaskedTextBox();
             this.MT23 = new System.Windows.Forms.MaskedTextBox();
             this.MT33 = new System.Windows.Forms.MaskedTextBox();
             this.MT12 = new System.Windows.Forms.MaskedTextBox();
+            this.MT32 = new System.Windows.Forms.MaskedTextBox();
+            this.MT22 = new System.Windows.Forms.MaskedTextBox();
             this.MT31 = new System.Windows.Forms.MaskedTextBox();
             this.MT21 = new System.Windows.Forms.MaskedTextBox();
-            this.MT11 = new System.Windows.Forms.MaskedTextBox();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox5 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox6 = new System.Windows.Forms.MaskedTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.button15 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox5 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox6 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -269,22 +270,13 @@ namespace Image_Processor
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // MT22
+            // MT11
             // 
-            this.MT22.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.MT22.Location = new System.Drawing.Point(41, 45);
-            this.MT22.Mask = "##";
-            this.MT22.Name = "MT22";
-            this.MT22.Size = new System.Drawing.Size(29, 20);
-            this.MT22.TabIndex = 8;
-            // 
-            // MT32
-            // 
-            this.MT32.Location = new System.Drawing.Point(41, 71);
-            this.MT32.Mask = "##";
-            this.MT32.Name = "MT32";
-            this.MT32.Size = new System.Drawing.Size(29, 20);
-            this.MT32.TabIndex = 7;
+            this.MT11.Location = new System.Drawing.Point(6, 19);
+            this.MT11.Mask = "##";
+            this.MT11.Name = "MT11";
+            this.MT11.Size = new System.Drawing.Size(29, 20);
+            this.MT11.TabIndex = 0;
             // 
             // MT13
             // 
@@ -318,6 +310,23 @@ namespace Image_Processor
             this.MT12.Size = new System.Drawing.Size(29, 20);
             this.MT12.TabIndex = 3;
             // 
+            // MT32
+            // 
+            this.MT32.Location = new System.Drawing.Point(41, 71);
+            this.MT32.Mask = "##";
+            this.MT32.Name = "MT32";
+            this.MT32.Size = new System.Drawing.Size(29, 20);
+            this.MT32.TabIndex = 7;
+            // 
+            // MT22
+            // 
+            this.MT22.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.MT22.Location = new System.Drawing.Point(41, 45);
+            this.MT22.Mask = "##";
+            this.MT22.Name = "MT22";
+            this.MT22.Size = new System.Drawing.Size(29, 20);
+            this.MT22.TabIndex = 8;
+            // 
             // MT31
             // 
             this.MT31.Location = new System.Drawing.Point(6, 71);
@@ -333,14 +342,6 @@ namespace Image_Processor
             this.MT21.Name = "MT21";
             this.MT21.Size = new System.Drawing.Size(29, 20);
             this.MT21.TabIndex = 1;
-            // 
-            // MT11
-            // 
-            this.MT11.Location = new System.Drawing.Point(6, 19);
-            this.MT11.Mask = "##";
-            this.MT11.Name = "MT11";
-            this.MT11.Size = new System.Drawing.Size(29, 20);
-            this.MT11.TabIndex = 0;
             // 
             // chart2
             // 
@@ -394,6 +395,7 @@ namespace Image_Processor
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button15);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label12);
@@ -419,80 +421,70 @@ namespace Image_Processor
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ввод параметров распределений";
             // 
-            // maskedTextBox1
+            // button15
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(38, 27);
-            this.maskedTextBox1.Mask = "000";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(29, 20);
-            this.maskedTextBox1.TabIndex = 1;
+            this.button15.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.button15.Location = new System.Drawing.Point(603, 16);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(36, 83);
+            this.button15.TabIndex = 19;
+            this.button15.Text = "ОК";
+            this.button15.UseVisualStyleBackColor = false;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
-            // maskedTextBox2
+            // label14
             // 
-            this.maskedTextBox2.Location = new System.Drawing.Point(38, 53);
-            this.maskedTextBox2.Mask = "000";
-            this.maskedTextBox2.Name = "maskedTextBox2";
-            this.maskedTextBox2.Size = new System.Drawing.Size(29, 20);
-            this.maskedTextBox2.TabIndex = 2;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(73, 82);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(140, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "- некоторый коэффициент";
             // 
-            // maskedTextBox3
+            // label13
             // 
-            this.maskedTextBox3.Location = new System.Drawing.Point(38, 79);
-            this.maskedTextBox3.Mask = "#0.00";
-            this.maskedTextBox3.Name = "maskedTextBox3";
-            this.maskedTextBox3.Size = new System.Drawing.Size(29, 20);
-            this.maskedTextBox3.TabIndex = 3;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(381, 82);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(116, 13);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "- показатель степени";
             // 
-            // maskedTextBox4
+            // label12
             // 
-            this.maskedTextBox4.Location = new System.Drawing.Point(346, 79);
-            this.maskedTextBox4.Mask = "#0.00";
-            this.maskedTextBox4.Name = "maskedTextBox4";
-            this.maskedTextBox4.Size = new System.Drawing.Size(29, 20);
-            this.maskedTextBox4.TabIndex = 6;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(381, 30);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(208, 13);
+            this.label12.TabIndex = 16;
+            this.label12.Text = "- мин. яркость выходного изображения";
             // 
-            // maskedTextBox5
+            // label11
             // 
-            this.maskedTextBox5.Location = new System.Drawing.Point(346, 53);
-            this.maskedTextBox5.Mask = "000";
-            this.maskedTextBox5.Name = "maskedTextBox5";
-            this.maskedTextBox5.Size = new System.Drawing.Size(29, 20);
-            this.maskedTextBox5.TabIndex = 5;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(381, 56);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(214, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "- макс. яркость выходного изображения";
             // 
-            // maskedTextBox6
+            // label10
             // 
-            this.maskedTextBox6.Location = new System.Drawing.Point(346, 27);
-            this.maskedTextBox6.Mask = "000";
-            this.maskedTextBox6.Name = "maskedTextBox6";
-            this.maskedTextBox6.Size = new System.Drawing.Size(29, 20);
-            this.maskedTextBox6.TabIndex = 4;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(73, 30);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(200, 13);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "- мин. яркость входного изображения";
             // 
-            // label3
+            // label9
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "fmin";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 56);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "fmax";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 82);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(13, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "a";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(73, 56);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(206, 13);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "- макс. яркость входного изображения";
             // 
             // label6
             // 
@@ -521,59 +513,80 @@ namespace Image_Processor
             this.label8.TabIndex = 10;
             this.label8.Text = "gmin";
             // 
-            // label9
+            // label5
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(73, 56);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(206, 13);
-            this.label9.TabIndex = 13;
-            this.label9.Text = "- макс. яркость входного изображения";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 82);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(13, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "a";
             // 
-            // label10
+            // label4
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(73, 30);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(200, 13);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "- мин. яркость входного изображения";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 56);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "fmax";
             // 
-            // label11
+            // label3
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(381, 56);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(214, 13);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "- макс. яркость выходного изображения";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(26, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "fmin";
             // 
-            // label12
+            // maskedTextBox4
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(381, 30);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(208, 13);
-            this.label12.TabIndex = 16;
-            this.label12.Text = "- мин. яркость выходного изображения";
+            this.maskedTextBox4.Location = new System.Drawing.Point(346, 27);
+            this.maskedTextBox4.Mask = "000";
+            this.maskedTextBox4.Name = "maskedTextBox4";
+            this.maskedTextBox4.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox4.TabIndex = 6;
             // 
-            // label13
+            // maskedTextBox5
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(381, 82);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(116, 13);
-            this.label13.TabIndex = 17;
-            this.label13.Text = "- показатель степени";
+            this.maskedTextBox5.Location = new System.Drawing.Point(346, 53);
+            this.maskedTextBox5.Mask = "000";
+            this.maskedTextBox5.Name = "maskedTextBox5";
+            this.maskedTextBox5.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox5.TabIndex = 5;
             // 
-            // label14
+            // maskedTextBox6
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(73, 82);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(140, 13);
-            this.label14.TabIndex = 18;
-            this.label14.Text = "- некоторый коэффициент";
+            this.maskedTextBox6.Location = new System.Drawing.Point(346, 79);
+            this.maskedTextBox6.Mask = "##.##";
+            this.maskedTextBox6.Name = "maskedTextBox6";
+            this.maskedTextBox6.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox6.TabIndex = 4;
+            // 
+            // maskedTextBox3
+            // 
+            this.maskedTextBox3.Location = new System.Drawing.Point(38, 79);
+            this.maskedTextBox3.Mask = "##.##";
+            this.maskedTextBox3.Name = "maskedTextBox3";
+            this.maskedTextBox3.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox3.TabIndex = 3;
+            // 
+            // maskedTextBox2
+            // 
+            this.maskedTextBox2.Location = new System.Drawing.Point(38, 53);
+            this.maskedTextBox2.Mask = "000";
+            this.maskedTextBox2.Name = "maskedTextBox2";
+            this.maskedTextBox2.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox2.TabIndex = 2;
+            // 
+            // maskedTextBox1
+            // 
+            this.maskedTextBox1.Location = new System.Drawing.Point(38, 27);
+            this.maskedTextBox1.Mask = "000";
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(29, 20);
+            this.maskedTextBox1.TabIndex = 1;
             // 
             // button9
             // 
@@ -583,6 +596,7 @@ namespace Image_Processor
             this.button9.TabIndex = 13;
             this.button9.Text = "Равномерное распределение";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
@@ -729,6 +743,7 @@ namespace Image_Processor
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
     }
 }
 
