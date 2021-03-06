@@ -606,6 +606,7 @@ namespace Image_Processor
             this.button10.TabIndex = 14;
             this.button10.Text = "Экспоненциаль- ное распределение";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
@@ -615,6 +616,7 @@ namespace Image_Processor
             this.button11.TabIndex = 15;
             this.button11.Text = "Распределение Рэлея";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
@@ -624,6 +626,7 @@ namespace Image_Processor
             this.button12.TabIndex = 18;
             this.button12.Text = "Степенная интенсификация";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
@@ -633,6 +636,7 @@ namespace Image_Processor
             this.button13.TabIndex = 17;
             this.button13.Text = "Гиперболичес- кое распределение";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
@@ -642,6 +646,7 @@ namespace Image_Processor
             this.button14.TabIndex = 16;
             this.button14.Text = "Распределение степени 2/3";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // Form1
             // 

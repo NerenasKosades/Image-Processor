@@ -26,10 +26,10 @@ namespace Image_Processor
         }
 
         static Bitmap image;                //Рабочее изображение
-        Bitmap startImage;                  // Хранение стартового изображения   
+        static Bitmap startImage;                  // Хранение стартового изображения   
         int fMax, fMin, gMax, gMin;         //  Глобальные переменные для
         double alfa, power;                 //  для рассчета распределений
-
+                
         private void button1_Click(object sender, EventArgs e)          //Реализация кнопки загрузки изображения
         {
             OpenFileDialog openDialog = new OpenFileDialog();
@@ -113,7 +113,7 @@ namespace Image_Processor
             return bmpCheck;
         }
 
-        public static int Check(int color)
+        public static int Check(int color)                     // Перегрузка функции проверки
         {
             if (color > 255)
                 color = 255;
@@ -287,6 +287,8 @@ namespace Image_Processor
 
         }
 
+        
+
         private void button6_Click(object sender, EventArgs e)          //Реализация инверсии
         {
                        
@@ -326,6 +328,8 @@ namespace Image_Processor
             }
         }
 
+        
+
         private void button7_Click(object sender, EventArgs e)          //Реализация бинаризации
         {
             if (pictureBox1.Image != null)
@@ -363,7 +367,7 @@ namespace Image_Processor
             {
                 MessageBox.Show("Сначала загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }        
 
         private void button8_Click(object sender, EventArgs e)          //Расcчет сверток
         {
@@ -516,6 +520,8 @@ namespace Image_Processor
             }
         }
 
+        
+
         private void button9_Click(object sender, EventArgs e)              //Рассчет равномерного распределения(Even distribution)
         {
             try
@@ -552,8 +558,193 @@ namespace Image_Processor
                 MessageBox.Show("Заполните поля и нажмите ОК, загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+               
+
+        private void button10_Click(object sender, EventArgs e)             //Экспоненциальное распределение
+        {
+            try
+            {
+                Bitmap Freq = new Bitmap(pictureBox1.Image);
+
+                int[,] redArray = new int[Freq.Height, Freq.Width];
+                int[,] greenArray = new int[Freq.Height, Freq.Width];
+                int[,] blueArray = new int[Freq.Height, Freq.Width];
+
+                for (int i = 0; i < Freq.Height; i++)
+                {
+                    for (int j = 0; j < Freq.Width; j++)
+                    {
+                        redArray[i, j] = Freq.GetPixel(i, j).R;
+                        greenArray[i, j] = Freq.GetPixel(i, j).G;
+                        blueArray[i, j] = Freq.GetPixel(i, j).B;
+
+                        redArray[i, j] = Convert.ToInt32(gMin - 1 / alfa * Math.Log10(1 - Frequency(redArray, redArray[i, j])));
+                        greenArray[i, j] = Convert.ToInt32(gMin - 1 / alfa * Math.Log10(1 - Frequency(greenArray, greenArray[i, j])));
+                        blueArray[i, j] = Convert.ToInt32(gMin - 1 / alfa * Math.Log10(1 - Frequency(blueArray, blueArray[i, j])));
+
+                        redArray[i, j] = Check(redArray[i, j]);
+                        greenArray[i, j] = Check(greenArray[i, j]);
+                        blueArray[i, j] = Check(blueArray[i, j]);
+
+                        Freq.SetPixel(i, j, Color.FromArgb(255, redArray[i, j], greenArray[i, j], blueArray[i, j]));
+                    }
+                }
+                pictureBox1.Image = Freq;
+            }
+            catch
+            {
+                MessageBox.Show("Заполните поля и нажмите ОК, загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)                 // Распределение Рэлея
+        {
+            try
+            {
+                Bitmap Freq = new Bitmap(pictureBox1.Image);
+
+                int[,] redArray = new int[Freq.Height, Freq.Width];
+                int[,] greenArray = new int[Freq.Height, Freq.Width];
+                int[,] blueArray = new int[Freq.Height, Freq.Width];
+
+                for (int i = 0; i < Freq.Height; i++)
+                {
+                    for (int j = 0; j < Freq.Width; j++)
+                    {
+                        redArray[i, j] = Freq.GetPixel(i, j).R;
+                        greenArray[i, j] = Freq.GetPixel(i, j).G;
+                        blueArray[i, j] = Freq.GetPixel(i, j).B;
+
+                        redArray[i, j] = Convert.ToInt32(gMin + Math.Pow(2 * alfa * alfa * Math.Log10(1 / (1 - Frequency(redArray, redArray[i, j]))), 0.5));
+                        greenArray[i, j] = Convert.ToInt32(gMin + Math.Pow(2 * alfa * alfa * Math.Log10(1 / (1 - Frequency(greenArray, greenArray[i, j]))), 0.5));
+                        blueArray[i, j] = Convert.ToInt32(gMin + Math.Pow(2 * alfa * alfa * Math.Log10(1 / (1 - Frequency(blueArray, blueArray[i, j]))), 0.5));
+
+                        redArray[i, j] = Check(redArray[i, j]);
+                        greenArray[i, j] = Check(greenArray[i, j]);
+                        blueArray[i, j] = Check(blueArray[i, j]);
+
+                        Freq.SetPixel(i, j, Color.FromArgb(255, redArray[i, j], greenArray[i, j], blueArray[i, j]));
+                    }
+                }
+                pictureBox1.Image = Freq;
+            }
+            catch
+            {
+                MessageBox.Show("Заполните поля и нажмите ОК, загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button14_Click(object sender, EventArgs e)             // Распределение степени 2/3
+        {
+            try
+            {
+                Bitmap Freq = new Bitmap(pictureBox1.Image);
+
+                int[,] redArray = new int[Freq.Height, Freq.Width];
+                int[,] greenArray = new int[Freq.Height, Freq.Width];
+                int[,] blueArray = new int[Freq.Height, Freq.Width];
+
+                for (int i = 0; i < Freq.Height; i++)
+                {
+                    for (int j = 0; j < Freq.Width; j++)
+                    {
+                        redArray[i, j] = Freq.GetPixel(i, j).R;
+                        greenArray[i, j] = Freq.GetPixel(i, j).G;
+                        blueArray[i, j] = Freq.GetPixel(i, j).B;
+
+                        redArray[i, j] = Convert.ToInt32(Math.Pow(Math.Pow(gMax, 1 / 3) - Math.Pow(gMin, 1 /3) * Frequency(redArray, redArray[i, j]) + Math.Pow(gMin, 1 / 3), 3));
+                        greenArray[i, j] = Convert.ToInt32(Math.Pow(Math.Pow(gMax, 1 / 3) - Math.Pow(gMin, 1 / 3) * Frequency(greenArray, greenArray[i, j]) + Math.Pow(gMin, 1 / 3), 3));
+                        blueArray[i, j] = Convert.ToInt32(Math.Pow(Math.Pow(gMax, 1 / 3) - Math.Pow(gMin, 1 / 3) * Frequency(blueArray, blueArray[i, j]) + Math.Pow(gMin, 1 / 3), 3));
+
+                        redArray[i, j] = Check(redArray[i, j]);
+                        greenArray[i, j] = Check(greenArray[i, j]);
+                        blueArray[i, j] = Check(blueArray[i, j]);
+
+                        Freq.SetPixel(i, j, Color.FromArgb(255, redArray[i, j], greenArray[i, j], blueArray[i, j]));
+                    }
+                }
+                pictureBox1.Image = Freq;
+            }
+            catch
+            {
+                MessageBox.Show("Заполните поля и нажмите ОК, загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)             // Гиперболическое распределение
+        {
+            try
+            {
+                Bitmap Freq = new Bitmap(pictureBox1.Image);
+
+                int[,] redArray = new int[Freq.Height, Freq.Width];
+                int[,] greenArray = new int[Freq.Height, Freq.Width];
+                int[,] blueArray = new int[Freq.Height, Freq.Width];
+
+                for (int i = 0; i < Freq.Height; i++)
+                {
+                    for (int j = 0; j < Freq.Width; j++)
+                    {
+                        redArray[i, j] = Freq.GetPixel(i, j).R;
+                        greenArray[i, j] = Freq.GetPixel(i, j).G;
+                        blueArray[i, j] = Freq.GetPixel(i, j).B;
+
+                        redArray[i, j] = Convert.ToInt32(gMin * Math.Pow(gMax / gMin, Frequency(redArray, redArray[i, j])));
+                        greenArray[i, j] = Convert.ToInt32(gMin * Math.Pow(gMax / gMin, Frequency(redArray, redArray[i, j])));
+                        blueArray[i, j] = Convert.ToInt32(gMin * Math.Pow(gMax / gMin, Frequency(redArray, redArray[i, j])));
+
+                        redArray[i, j] = Check(redArray[i, j]);
+                        greenArray[i, j] = Check(greenArray[i, j]);
+                        blueArray[i, j] = Check(blueArray[i, j]);
+
+                        Freq.SetPixel(i, j, Color.FromArgb(255, redArray[i, j], greenArray[i, j], blueArray[i, j]));
+                    }
+                }
+                pictureBox1.Image = Freq;
+            }
+            catch
+            {
+                MessageBox.Show("Заполните поля и нажмите ОК, загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)                 //Степенная интенсификация
+        {
+            try
+            {
+                Bitmap Freq = new Bitmap(pictureBox1.Image);
+
+                int[,] redArray = new int[Freq.Height, Freq.Width];
+                int[,] greenArray = new int[Freq.Height, Freq.Width];
+                int[,] blueArray = new int[Freq.Height, Freq.Width];
+
+                for (int i = 0; i < Freq.Height; i++)
+                {
+                    for (int j = 0; j < Freq.Width; j++)
+                    {
+                        redArray[i, j] = Freq.GetPixel(i, j).R;
+                        greenArray[i, j] = Freq.GetPixel(i, j).G;
+                        blueArray[i, j] = Freq.GetPixel(i, j).B;
+
+                        redArray[i, j] = Convert.ToInt32((((gMax - gMin) * Frequency(redArray, redArray[i, j])) / Frequency(redArray, redArray[i, j])) + gMin);
+                        greenArray[i, j] = Convert.ToInt32((((gMax - gMin) * Frequency(greenArray, greenArray[i, j])) / Frequency(greenArray, greenArray[i, j])) + gMin);
+                        blueArray[i, j] = Convert.ToInt32((((gMax - gMin) * Frequency(blueArray, blueArray[i, j])) / Frequency(blueArray, blueArray[i, j])) + gMin);
+
+                        redArray[i, j] = Check(redArray[i, j]);
+                        greenArray[i, j] = Check(greenArray[i, j]);
+                        blueArray[i, j] = Check(blueArray[i, j]);
+
+                        Freq.SetPixel(i, j, Color.FromArgb(255, redArray[i, j], greenArray[i, j], blueArray[i, j]));
+                    }
+                }
+                pictureBox1.Image = Freq;
+            }
+            catch
+            {
+                MessageBox.Show("Заполните поля и нажмите ОК, загрузите изображение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
 //Не забудь обработать исключение при пустых масках
 //Не забудь делать проверку диапазонов
-//redColor = Convert.ToInt32((gMax - gMin) * redFrequency + gMin);    //Обработка пикселей
